@@ -6,9 +6,10 @@ import { AppService } from './app.service';
 
 import * as ormOptions from './config/orm';
 import UserResolver from './resolvers/user.resolver';
+import MessageResolver from './resolvers/message.resolver';
 import { GraphQLModule } from '@nestjs/graphql';
 
-const gqlImports = [UserResolver];
+const gqlImports = [UserResolver, MessageResolver];
 
 @Module({
   imports: [
@@ -17,6 +18,8 @@ const gqlImports = [UserResolver];
     ...gqlImports,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
+      playground: true,
+      installSubscriptionHandlers: true,
     }),
   ],
   controllers: [AppController],
